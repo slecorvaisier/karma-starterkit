@@ -3,11 +3,12 @@
   "version": "1.0.0",
   "description": "Simple nodejs boilerplate for unit test with Karma",
   "author": "Steven Le Corvaisier",
-  "license": "© Steven Le Corvaisier",
+  "license": "MIT",
   "scripts": {
     "start:dev": "NODE_ENV=development node src/server.js",
     "start:prod": "NODE_ENV=production node src/server.js",
-    "test": "./node_modules/karma/bin/karma start karma.conf.js"
+    "test": "./node_modules/karma/bin/karma start karma.conf.js",
+    "test:mocha": "./node_modules/mocha/bin/mocha src --recursive --watch"
   },
   "dependencies": {
     "body-parser": "^1.15.1",

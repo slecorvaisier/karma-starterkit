@@ -30,15 +30,13 @@ describe('experiment checkAuth', () => {
   });
 
   it('should prepare the life via a builder',  function() {
-    return authentication.check(req, res, next).then(function() {
-      expect(builder.prepare.calledOnce).to.be.true;
-    });
+    authentication.check(req, res, next);
+    expect(builder.prepare.calledOnce).to.be.true;
   });
 
   it('should send the data back',  function() {
-    return authentication.check(req, res, next).then(function() {
-      expect(res.send.calledOnce).to.be.true;
-    });
+    authentication.check(req, res, next);
+    expect(res.send.calledOnce).to.be.true;
   });
 
 });

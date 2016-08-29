@@ -1,6 +1,6 @@
 'use strict';
 
-var config = require('./config.base');
+var config = require('./base');
 
 config.life = 'nachos';
 
