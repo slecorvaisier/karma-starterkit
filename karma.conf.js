@@ -32,7 +32,7 @@ module.exports = function(config) {
     // test results reporter to use
     // possible values: 'dots', 'progress'
     // available reporters: https://npmjs.org/browse/keyword/karma-reporter
-    reporters: ['progress', 'mocha'],
+    reporters: ['progress', 'mocha', 'coverage'],
 
     // browserify configuration
     browserify: {
@@ -40,7 +40,20 @@ module.exports = function(config) {
       transform: [
         ['babelify',{
           presets: ['es2015'],
+        }],
+        ['browserify-istanbul', {
+          instrumenterConfig: {
+            embedSource: true,
+          },
         }]
+      ]
+    },
+
+    // coverage configuration
+    coverageReporter: {
+      reporters: [
+        { 'type': 'text' },
+        { 'type': 'html', dir: 'coverage' },
       ]
     },
 
