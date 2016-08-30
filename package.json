@@ -1,7 +1,7 @@
 {
-  "name": "karma-boilerplate",
+  "name": "karma-starterkit",
   "version": "1.0.0",
-  "description": "Simple nodejs boilerplate for unit test with Karma",
+  "description": "Simple nodejs starter kit for unit test with Karma",
   "author": "Steven Le Corvaisier",
   "license": "MIT",
   "scripts": {
