@@ -16,50 +16,41 @@ describe('Controller: authentication', () => {
   // inputs & outputs
   let req, res, next;
 
-  // stubs;
-  let builderPrepareStub;
+  let sandbox;
 
   describe('Method: checkAuth', () => {
 
     beforeEach(() => {
+      sandbox = sinon.sandbox.create();
+
       req = {};
       res = {
-        send: () => {},
+        send: sandbox.stub().returns({}),
       };
       next = () => {};
 
-      sinon.spy(res, 'send');
-      builderPrepareStub = sinon.stub(builder, 'prepare');
+      builder.prepare = sandbox.stub().returns(builderMock.prepare());
     });
 
     afterEach(() => {
-      res.send.restore();
-      builderPrepareStub.restore();
+      sandbox.restore();
     });
 
-    describe('when success', () => {
+    it('should prepare the life via a builder',  function() {
+      authentication.check(req, res, next);
+      expect(builder.prepare.calledOnce).to.be.true;
+    });
 
-      beforeEach(() => {
-        builderPrepareStub.returns(builderMock.prepare());
-      });
-
-      it('should prepare the life via a builder',  function() {
-        authentication.check(req, res, next);
-        expect(builderPrepareStub.calledOnce).to.be.true;
-      });
-
-      it('should send the data back',  function() {
-        authentication.check(req, res, next);
-        expect(res.send.calledOnce).to.be.true;
-        expect(res.send.lastCall.args[0]).to.equal('tested code with success');
-      });
-
+    it('should send the data back',  function() {
+      authentication.check(req, res, next);
+      expect(res.send.calledOnce).to.be.true;
+      expect(res.send.lastCall.args[0]).to.equal('tested code with success');
     });
 
     describe('when builder fails', () => {
 
       beforeEach(() => {
-        builderPrepareStub.returns(builderMock.prepareFail());
+        builder.prepare = sandbox.stub().returns(builderMock.prepareFail());
       });
 
       it('should send the data back',  function() {
