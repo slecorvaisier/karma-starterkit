@@ -51,7 +51,7 @@ describe('Controller: authentication', () => {
     describe('when builder fails', () => {
 
       beforeEach(() => {
-        if (builder.prepare.restore) builder.prepare();
+        if (builder.prepare.restore) builder.prepare.restore();
         sandbox.stub(builder, 'prepare', builderMock.prepareFail);
       });
 
