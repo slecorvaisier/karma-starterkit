@@ -25,11 +25,12 @@ describe('Controller: authentication', () => {
 
       req = {};
       res = {
-        send: sandbox.stub().returns({}),
+        send: () => {},
       };
       next = () => {};
 
-      builder.prepare = sandbox.stub().returns(builderMock.prepare());
+      sandbox.stub(res, 'send', () => {});
+      sandbox.stub(builder, 'prepare', builderMock.prepare);
     });
 
     afterEach(() => {
@@ -50,7 +51,8 @@ describe('Controller: authentication', () => {
     describe('when builder fails', () => {
 
       beforeEach(() => {
-        builder.prepare = sandbox.stub().returns(builderMock.prepareFail());
+        if (builder.prepare.restore) sinon.restore(builder, 'prepare');
+        sandbox.stub(builder, 'prepare', builderMock.prepareFail);
       });
 
       it('should send the data back',  function() {
